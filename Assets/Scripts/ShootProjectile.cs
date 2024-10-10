@@ -30,7 +30,6 @@ public class ShootProjectile : MonoBehaviour
             Destroy(laser, 3f);
 
             cooldownCounter = 0f;
-
         }
     }
 

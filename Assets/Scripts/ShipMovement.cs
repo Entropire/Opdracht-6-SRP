@@ -1,32 +1,18 @@
-using System;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class ShipMovement : MonoBehaviour
+public class ShipMovement : Movement
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 25f;
-
     private void Start()
     {
         ShipAbility.OnRotationSpeedAbility += HandleRotationSpeedEvent;
         ShipAbility.OnMovementSpeedAbility += HandleMovementSpeedEvent;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        Move();
-        Rotate();
-    }
-
-    void Move()
-    {
-        transform.position += transform.forward * moveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
-    }
-
-    void Rotate()
-    {
-        transform.Rotate(transform.up * rotationSpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+        Move(Input.GetAxis("Vertical"));
+        Rotate(Input.GetAxis("Horizontal"));
     }
 
     private void HandleRotationSpeedEvent(float i)
